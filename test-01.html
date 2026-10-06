@@ -91,7 +91,8 @@ const CISLO_FAZY = 1;
 const REALNA = "A";
 const KONTROLA_A = "89be52b7bb0a2727cb5ca5bfe808672ee50445f004d983c668e42e37992ea311";
 const KONTROLA_B = "85db8a783953e99f2ac7c31ec516227c1a37d4301fa16299eebae7e60d5d2172";
-const NEXT_URL = "";  // doplniť, až bude jasné, kde žije test 02.
+const NEXT_URL = "https://youtu.be/C2P-ZV3t_YA";  // premiéra — druhá polovica kľúča
+const KUSOK = "Q0lDQURB";  // 1. polovica kľúča (base64 "CICADA"); 2. polovica bude na premiére
 
 function norm(s){
   return s.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
@@ -125,7 +126,10 @@ async function over(cesta){
       html += '<span class="fragment">1.' + (j+1) + ": " + f + "</span><br>";
     });
     html += '<br><button onclick="kopiruj(\'' + frags.join(" ") + '\')">Kopírovať všetky</button>';
-    if(NEXT_URL) html += '<br><br>Ďalší test: <a style="color:#9ab" href="' + NEXT_URL + '">pokračovať →</a>';
+    if(NEXT_URL) html += '<br><br><b>Kúsok kľúča:</b> <span class="fragment">' + KUSOK + '</span><br>' +
+      '<span style="color:#777">Druhú polovicu hľadaj na premiére:</span><br>' +
+      '<a style="color:#9ab" href="' + NEXT_URL + '">premiéra →</a><br>' +
+      '<span style="color:#555;font-size:.85em">Obe polovice spoj a dekóduj ako base64. Kľúč si uschovaj — budeš ho potrebovať.</span>';
     vystup.innerHTML = html;
   } else {
     const mini = (await sha256hex("c6845|" + CISLO_FAZY + "|mini|" + n)).slice(0,2);
